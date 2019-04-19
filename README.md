@@ -10,9 +10,9 @@
 
 # Installation Steps
 1. add ssh key
-2. git clone git@github.com:vmware/flowgate.git
-3. cd flowgate/make
-4. bash build.sh all -version v1.0
+2. `git clone git@github.com:vmware/flowgate.git`
+3. `cd flowgate/make`
+4. `bash build.sh all -version v1.0`
 
 # run
 1. bash flowgate_run.sh
