@@ -4,9 +4,9 @@
 
 # Software
 * ubuntu 16.04
-* git
-* docker
-* docker-compose
+* git (laster)
+* docker (laster)
+* docker-compose (laster)
 
 # Installation Steps
 1. add ssh key
@@ -15,11 +15,11 @@
 4. `bash build.sh all -version v1.0`
 
 # run
-1. bash flowgate_run.sh
+1. `bash flowgate_run.sh`
 2. access https://hostname to visit
 
 # down
-* docker-compose -f maven-docker-build/docker-compose.run.images.yml down
+* `docker-compose -f maven-docker-build/docker-compose.run.images.yml down`
 
 # issue
 ## 1. curl#6: Couldn't resolve host name.
