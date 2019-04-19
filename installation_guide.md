@@ -1,69 +1,128 @@
 # Installation and Configuration Guide
-Flowgate can be installed by one of three approaches: 
-- **Online installer:** The installer downloads Harbor's images from Docker hub. For this reason, the installer is very small in size.
+Flowgate can be installed by one of two approaches: 
 
-- **Offline installer:** Use this installer when the host does not have an Internet connection. The installer contains pre-built images so its size is larger.
+- **Source installer:** The installer downloads Flowgate's source code from github. Please refer to **[Flowgate Compile Guide](compile_guide.md)**.
 
-All installers can be downloaded from the **[official release](https://github.com/goharbor/harbor/releases)** page. 
+- **Binary installer:** The installer downloads Flowgate's Binary from server[url]. 
 
-This guide describes the steps to install and configure Flowgate by using the online or offline installer.
 
- The installation processes are almost the same. 
+This guide describes the steps to install and configure Flowgate by using the Source or Binary installer. The run processes are almost the same. 
 
 ## Prerequisites for the target host
-Flowgate is deployed as several Docker containers, and, therefore, can be deployed on any Linux distribution that supports Docker. The target host requires  Docker, and Docker Compose to be installed. 
-
+Flowgate is deployed as several Docker containers, and can be deployed on any Linux distribution that supports Docker. The target host requires Docker, and Docker Compose to be installed.  
 ### Hardware
 |Resource|Capacity|Description|
 |---|---|---|
 |CPU|minimal 2 CPU|4 CPU is preferred|
 |Mem|minimal 4GB|8GB is preferred|
 |Disk|minimal 40GB|160GB is preferred|
-
-### Network ports
-
-|Port|Protocol|Description|
-|---|---|---|
-|443|HTTPS|Flowgate will accept requests on this port for https protocol|
-|80|HTTP|Flowgate will accept requests on this port for http protocol|
-
 ### Software
-
 |Software|Version|Description|
 |---|---|---|
-|Ubuntu|version 16.04|ubuntu 16.04|
-|Git|version 2.7.4 or higher|For installation instructions, please refer to: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git|
-|Docker|version 18.09.2 or higher|For installation instructions, please refer to: https://docs.docker.com/engine/installation/|
-|Docker-compose|latest is preferred|For installation instructions, please refer to: https://docs.docker.com/compose/install/|
+|Docker engine|version 1.10 or higher|For installation instructions, please refer to: https://docs.docker.com/engine/installation/|
+|Docker Compose|version 1.6.0 or higher|For installation instructions, please refer to: https://docs.docker.com/compose/install/|
+|Git|latest is preferred|For installation instructions, please refer to: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git|
+### Network ports 
+|Port|Protocol|Description|
+|---|---|---|
+|443|HTTPS|Flowgate portal and core API will accept requests on this port for https protocol|
+|80|HTTP|Flowgate portal and core API will accept requests on this port for http protocol|
 
 ## Installation Steps
 
-The installation steps boil down to the following
 
-1. download the source code
-2. run build script under make folder 
+### Source Installation
+Please refer to **[Flowgate Compile Guide](compile_guide.md)**.
 
+### Binary Installation
 
-1. git clone git@github.com:vmware/flowgate.git
-2. cd flowgate/make
-3. bash build.sh all -version v1.0
-
-
-# run
+1. Download the installer from server[url];
+2. Use *tar* command to extract the package, then you will get three files, ```flowgate_run.sh```, ```conf.tar.gz```, ```flowgate.tar```.
+*(Note that put the three files into the same folder.)*
 ```
-1. bash flowgate_run.sh
+    $ tar xvf flowgate-v1.0.tar
 ```
-2. access https://hostname to visit
 
-# down
-``` 
-docker-compose -f maven-docker-build/docker-compose.run.images.yml down
+3. loading docker images:
 ```
-# Login
-* default username admin , password Admin!23
-* access https://hostname to visit
-# issue
-## 1. curl#6: Couldn't resolve host name.
-### add two nameserver to /etc/resolv.conf
-1. nameserver 10.195.12.31
-2. nameserver 10.172.40.1
+    $ sudo docker load < flowgate.tar
+```
+
+## Finishing installation and starting Flowgate
+
+### Start Flowgate
+
+```
+    $ sudo bash flowgate_run.sh
+```
+
+If everything worked properly, you should be able to open a browser to visit the admin portal at **https://yourdomain** (change *yourdomain* to your server's hostname). Note that the default administrator username/password are admin/Admin!23.
+
+### Managing Flowgate's lifecycle
+You can use docker-compose to manage the lifecycle of Flowgate. Some useful commands are listed as follows (must run in the same directory as *docker-compose.run.images.yml*).
+
+Stopping Flowgate:
+```
+$ sudo docker-compose -f docker-compose.run.images.yml down
+Stopping flowgate-labsdb-worker-container ... done
+Stopping flowgate-nlyte-worker-container ... done
+Stopping flowgate-vc-worker-container ... done
+Stopping flowgate-poweriq-worker-container ... done
+Stopping flowgate-management-container ... done
+Stopping flowgate-infoblox-worker-container ... done
+Stopping flowgate-vro-worker-container ... done
+Stopping flowgate-aggregator-container ... done
+Stopping flowgate-api-container ... done
+Stopping flowgate-redis-container ... done
+Stopping flowgate-mongo-container ... done
+Removing flowgate-labsdb-worker-container ... done
+Removing flowgate-nlyte-worker-container ... done
+Removing flowgate-vc-worker-container ... done
+Removing flowgate-poweriq-worker-container ... done
+Removing flowgate-management-container ... done
+Removing flowgate-infoblox-worker-container ... done
+Removing flowgate-vro-worker-container ... done
+Removing flowgate-aggregator-container ... done
+Removing flowgate-api-container ... done
+Removing flowgate-redis-container ... done
+Removing flowgate-mongo-container ... done
+Removing network mavendockerbuild_db-network
+Removing network mavendockerbuild_services-network
+```  
+Restarting Flowgate after stopping:
+```
+$ sudo docker-compose -f docker-compose.run.images.yml up -d
+Creating network "mavendockerbuild_db-network" with the default driver
+Creating network "mavendockerbuild_services-network" with the default driver
+Creating flowgate-mongo-container
+Creating flowgate-redis-container
+Creating flowgate-api-container
+Creating flowgate-aggregator-container
+Creating flowgate-nlyte-worker-container
+Creating flowgate-labsdb-worker-container
+Creating flowgate-management-container
+Creating flowgate-vc-worker-container
+Creating flowgate-infoblox-worker-container
+Creating flowgate-vro-worker-container
+Creating flowgate-poweriq-worker-container
+```  
+
+## Troubleshooting
+1. When Flowgate does not work properly, run the below commands to find out if all containers of Flowgate are in **UP** status: 
+```
+    $ sudo docker-compose -f docker-compose.run.images.yml ps
+               Name                             Command               State                    Ports                  
+---------------------------------------------------------------------------------------------------------------------
+flowgate-aggregator-container        sh start.sh                      Up                                              
+flowgate-api-container               sh start.sh                      Up      49610/tcp                               
+flowgate-infoblox-worker-container   sh start.sh                      Up                                              
+flowgate-labsdb-worker-container     sh start.sh                      Up                                              
+flowgate-management-container        sh start.sh                      Up      443/tcp, 0.0.0.0:443->49611/tcp, 80/tcp 
+flowgate-mongo-container             docker-entrypoint.sh mongod      Up      27017/tcp                               
+flowgate-nlyte-worker-container      sh start.sh                      Up                                              
+flowgate-poweriq-worker-container    sh start.sh                      Up                                              
+flowgate-redis-container             docker-entrypoint.sh redis ...   Up      6379/tcp                                
+flowgate-vc-worker-container         sh start.sh                      Up                                              
+flowgate-vro-worker-container        sh start.sh                      Up  
+```
+If a container is not in **UP** state, check the log file of that container in directory ```/opt/vmware/flowgate/log```. For example, if the container ```flowgate-api-container``` is not running, you should look at the log file ```/opt/vmware/flowgate/log/flowgate-api/*.log```.  

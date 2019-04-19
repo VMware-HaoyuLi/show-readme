@@ -1,178 +1,80 @@
 ## Introduction
 
-This guide provides instructions for developers to build and run Harbor from source code.
+This guide provides instructions for developers to build and run Flowgate from source code.
 
-## Step 1: Prepare for a build environment for Harbor
+## Step 1: Prepare for a build environment for Flowgate
 
-Harbor is deployed as several Docker containers and most of the code is written in Go language. The build environment requires Python, Docker, Docker Compose and golang development environment. Please install the below prerequisites:
-
+Flowgate is deployed as several Docker containers and most of the code is written in Java language. The build environment requires Docker, Docker Compose. Please install the below prerequisites:
 
 Software              | Required Version
 ----------------------|--------------------------
 docker                | 17.05 +
 docker-compose        | 1.11.0 +
-python                | 2.7 +
 git                   | 1.9.1 +
-make                  | 3.81 +
-golang*               | 1.7.3 +
-*optional, required only if you use your own Golang environment.
-
 
 ## Step 2: Getting the source code
 
    ```sh
-      $ git clone https://github.com/goharbor/harbor
+      $ git clone git@github.com:vmware/flowgate.git
    ```
 
-## Step 3: Building and installing Harbor
+## Step 3: Building and installing Flowgate
+### Compile code with your own environment, then build Flowgate
 
-### Configuration
-
-Edit the file **make/harbor.cfg** and make necessary configuration changes such as hostname, admin password and mail server. Refer to **[Installation and Configuration Guide](installation_guide.md#configuring-harbor)** for more info.
+*  Build Flowgate:
 
    ```sh
-      $ cd harbor
-      $ vi make/harbor.cfg
+      $ cd flowgate/
+      $ bash build.sh all -version v1.0
    ```
 
-### Compiling and Running
-
-You can compile the code by one of the three approaches:
-
-#### I. Build with official Golang image
-
-* Get official Golang image from docker hub:
-
-   ```sh
-      $ docker pull golang:1.11.2
-   ```
-
-*  Build, install and bring up Harbor without Notary:
-
-   ```sh
-      $ make install GOBUILDIMAGE=golang:1.11.2 COMPILETAG=compile_golangimage
-   ```
-
-*  Build, install and bring up Harbor with Notary:
-
-   ```sh
-      $ make install GOBUILDIMAGE=golang:1.11.2 COMPILETAG=compile_golangimage NOTARYFLAG=true
-   ```
-
-*  Build, install and bring up Harbor with Clair:
-
-   ```sh
-      $ make install GOBUILDIMAGE=golang:1.11.2 COMPILETAG=compile_golangimage CLAIRFLAG=true
-   ```
-
-#### II. Compile code with your own Golang environment, then build Harbor
-
-* Move source code to $GOPATH
-
-   ```sh
-      $ mkdir $GOPATH/src/github.com/goharbor/
-      $ cd ..
-      $ mv harbor $GOPATH/src/github.com/goharbor/.
-   ```
-
-*  Build, install and run Harbor without Notary and Clair:
-
-   ```sh
-      $ cd $GOPATH/src/github.com/goharbor/harbor
-      $ make install
-   ```
-
-*  Build, install and run Harbor with Notary and Clair:
-
-   ```sh
-      $ cd $GOPATH/src/github.com/goharbor/harbor
-      $ make install -e NOTARYFLAG=true CLAIRFLAG=true
-   ```   
- 
 ### Verify your installation
 
 If everything worked properly, you can get the below message:
 
    ```sh
       ...
-      Start complete. You can visit harbor now.
+      build success.
+   ```
+Also, you can execute below command to verify your installation:
+
+   ```
+      $ sudo docker images
+      REPOSITORY                 TAG                 IMAGE ID            CREATED             SIZE
+      flowgate/labsdb-worker     v1.0                b751b1e55ec9        5 hours ago         228MB
+      flowgate/nlyte-worker      v1.0                4c1b5c0c1893        5 hours ago         226MB
+      flowgate/aggregator        v1.0                a6ada87420a8        5 hours ago         229MB
+      flowgate/poweriq-worker    v1.0                b1d6997bd8c8        5 hours ago         226MB
+      flowgate/vro-worker        v1.0                6910c721130c        5 hours ago         231MB
+      flowgate/vc-worker         v1.0                81c255461862        5 hours ago         255MB
+      flowgate/redis             v1.0                b0d6035edaf6        5 hours ago         102MB
+      flowgate/api               v1.0                0b71d1eea75b        5 hours ago         238MB
+      flowgate/mongodb           v1.0                a56dcb8f1dad        5 hours ago         271MB
+      flowgate/infoblox-worker   v1.0                227b8304775d        5 hours ago         221MB
+      flowgate/management        v1.0                939197e11efe        5 hours ago         249MB
+      photon                     2.0                 c3c18145a8cd        13 days ago         32.4MB
+      maven                      3.3.9-jdk-8         9997d8483b2f        2 years ago         653MB
    ```
 
-Refer to [Installation and Configuration Guide](installation_guide.md#managing-harbors-lifecycle) for more information about managing your Harbor instance.   
-
 ## Appendix
-* Using the Makefile
+* Using the build.sh
 
-The `Makefile` contains these configurable parameters:
+The `build.sh` contains these configurable parameters:
 
 Variable           | Description
 -------------------|-------------
-BASEIMAGE          | Container base image, default: photon
-DEVFLAG            | Build model flag, default: dev
-COMPILETAG         | Compile model flag, default: compile_normal (local golang build)
-NOTARYFLAG         | Notary mode flag, default: false
-CLAIRFLAG          | Clair mode flag, default: false
-HTTPPROXY          | NPM http proxy for Clarity UI builder
-REGISTRYSERVER     | Remote registry server IP address
-REGISTRYUSER       | Remote registry server user name
-REGISTRYPASSWORD   | Remote registry server user password
-REGISTRYPROJECTNAME| Project name on remote registry server
-VERSIONTAG         | Harbor images tag, default: dev
-PKGVERSIONTAG      | Harbor online and offline version tag, default:dev
-
-* Predefined targets:
-
-Target              | Description
---------------------|-------------
-all                 | prepare env, compile binaries, build images and install images
-prepare             | prepare env
-compile             | compile ui and jobservice code
-compile_portal      | compile portal code
-compile_ui          | compile ui binary
-compile_jobservice  | compile jobservice binary
-build               | build Harbor docker images (default: using build_photon)
-build_photon        | build Harbor docker images from Photon OS base image
-install             | compile binaries, build images, prepare specific version of compose file and startup Harbor instance
-start               | startup Harbor instance (set NOTARYFLAG=true when with Notary)
-down                | shutdown Harbor instance (set NOTARYFLAG=true when with Notary)
-package_online      | prepare online install package
-package_offline     | prepare offline install package
-pushimage           | push Harbor images to specific registry server
-clean all           | remove binary, Harbor images, specific version docker-compose file, specific version tag and online/offline install package
-cleanbinary         | remove ui and jobservice binary
-cleanimage          | remove Harbor images
-cleandockercomposefile  | remove specific version docker-compose
-cleanversiontag     | remove specific version tag
-cleanpackage        | remove online/offline install package
+ui                 | only build ui.
+jar                | build jar package. (You must execute the above orders.)
+image              | build all docker images. (You must execute the above orders.)
+save               | save all of the docker images to a tar. (You must execute the above orders.)
+all                | build all above steps.
+version            | Specify a version number for Flowgate.
 
 #### EXAMPLE:
 
-#### Push Harbor images to specific registry server
+#### execute build script
 
    ```sh
-      $ make pushimage -e DEVFLAG=false REGISTRYSERVER=[$SERVERADDRESS] REGISTRYUSER=[$USERNAME] REGISTRYPASSWORD=[$PASSWORD] REGISTRYPROJECTNAME=[$PROJECTNAME]
-
-   ```
-
-   **Note**: need add "/" on end of REGISTRYSERVER. If REGISTRYSERVER is not set, images will be pushed directly to Docker Hub.
-
-
-   ```sh
-      $ make pushimage -e DEVFLAG=false REGISTRYUSER=[$USERNAME] REGISTRYPASSWORD=[$PASSWORD] REGISTRYPROJECTNAME=[$PROJECTNAME]
-
-   ```
-
-#### Clean up binaries and images of a specific version
-
-   ```sh
-      $ make clean -e VERSIONTAG=[TAG]
-
-   ```
-   **Note**: If new code had been added to Github, the git commit TAG will change. Better use this command to clean up images and files of previous TAG.
-
-#### By default, the make process create a development build. To create a release build of Harbor, set the below flag to false.
-
-   ```sh
-      $ make XXXX -e DEVFLAG=false
-
+      $ bash build.sh
+      eg. 'bash build.sh ( ui | jar | image | save | copy2server | all ) -version v1.0'
    ```

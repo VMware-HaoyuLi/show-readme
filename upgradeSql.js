@@ -1,0 +1,24 @@
+
+
+
+
+1/db.wormholeUser.updateMany({"_class":"com.vmware.wormhole.common.model.WormholeUser"},{$set:{"_class":"com.vmware.flowgate.common.model.WormholeUser"}});
+2/db.serverMapping.updateMany({"_class":"com.vmware.wormhole.common.model.ServerMapping"},{$set:{"_class":"com.vmware.flowgate.common.model.ServerMapping"}});
+3/db.sDDCSoftwareConfig.updateMany({"_class":"com.vmware.wormhole.common.model.SDDCSoftwareConfig"},{$set:{"_class":"com.vmware.flowgate.common.model.SDDCSoftwareConfig"}});
+4/db.facilitySoftwareConfig.updateMany({"_class":"com.vmware.wormhole.common.model.FacilitySoftwareConfig"},{$set:{"_class":"com.vmware.flowgate.common.model.FacilitySoftwareConfig"}});
+5/db.asset.remove({"category":"Sensors"});
+6/db.asset.updateMany({"_class":"com.vmware.wormhole.common.model.Asset"},{$set:{"_class":"com.vmware.flowgate.common.model.Asset"}});
+7/db.realTimeData.updateMany({"_class":"com.vmware.wormhole.common.model.RealTimeData"},{$set:{"_class":"com.vmware.flowgate.common.model.RealTimeData"}});
+8/create PrivilegeMappings
+9/db.wormholeRole.update({'roleName':'admin'},{$set:{'privilegeNames':["updateFacilitySoftwareConfigStatus","updateSddcSoftwareConfigStatus","readSystemSummary","tempHumidityMapping","readUserByUserName","facilityServerSyncDataByServerId","syncDataByServerId","readVROByUser","readUnMappedServers","readAssetsByVCID","readPrivileges","readRoles","createAnAsset","createAssets","readAsset","readAssetByAssetName","readAssetBySourceAndType","readAssetByType","readMappedAsset","readAssetByKeywords","readAssetByPduIsNull","updateAsset","deleteAsset","createRealTimeSensorDatas","createRealTimeSensorData","readServerSensorData","readMappingByVROID","createServerMapping","readAssetsByVROID","updateServerMapping","mergeServerMapping","readMappingsByVROIDAndPage","readMappingsByVCIDAndPage","readMappingsByVCID","createHostNameAndIPMapping","createFacilitySoftwareConfig","readFacilityByID","readFacilityByType","readFacilityByPage","deleteFacilitySoftwareConfig","updateFacilitySoftwareConfig","startFullMappingAggregation","generateServerPDUMapping","syncHostnameByIp","readVROJobs","readVCJobs","readJobByType","createSddcSoftwareConfig","deleteSddcSoftwareConfig","updateSddcSoftwareConfig","readSddcSoftwareConfigByID","readSddcSoftwareConfigByVC","readSddcSoftwareConfigByUserAndPage","readVROsSddcSoftwareConfigByUser","readSddcSoftwareConfigByTypeAndUser","createSensorSetting","readSensorSettings","readSensorSettingByID","readSensorSettingsByPage","updateSensorSetting","deleteSensorSetting","readHostNameAndIPMapping","deleteUser","updateUser","readUserByID","readUserByPage","readUsers","createRole","readRole","readRolesByPage","deleteRole","updateRole","Default_Access_Privilege"]}});
+10/db.wormholeRole.update({'roleName':'api'},{$set:{'privilegeNames':["updateSddcSoftwareConfigStatus","readVROByUser","readAssetsByVCID","readAsset","readAssetByAssetName","readAssetBySourceAndType","readAssetByType","readMappedAsset","readAssetByKeywords","readAssetByPduIsNull","readMappingByVROID","createServerMapping","readAssetsByVROID","updateServerMapping","mergeServerMapping","readMappingsByVROIDAndPage","readMappingsByVCIDAndPage","readMappingsByVCID","createSddcSoftwareConfig","deleteSddcSoftwareConfig","updateSddcSoftwareConfig","readSddcSoftwareConfigByID","readSddcSoftwareConfigByVC","readSddcSoftwareConfigByUserAndPage","readVROsSddcSoftwareConfigByUser","readSddcSoftwareConfigByTypeAndUser","readHostNameAndIPMapping","Default_Access_Privilege"]}})；
+11/db.wormholeRole.update({'roleName':'user'},{$set:{'privilegeNames':["updateSddcSoftwareConfigStatus","updateUser","syncDataByServerId","readUserByUserName","readVROByUser","readAssetsByVCID","readAsset","readAssetByAssetName","readAssetBySourceAndType","readAssetByType","readMappedAsset","readAssetByKeywords","readAssetByPduIsNull","readMappingByVROID","createServerMapping","readAssetsByVROID","updateServerMapping","mergeServerMapping","readMappingsByVROIDAndPage","readMappingsByVCIDAndPage","readMappingsByVCID","createSddcSoftwareConfig","deleteSddcSoftwareConfig","updateSddcSoftwareConfig","readSddcSoftwareConfigByID","readSddcSoftwareConfigByVC","readSddcSoftwareConfigByUserAndPage","readVROsSddcSoftwareConfigByUser","readSddcSoftwareConfigByTypeAndUser","Default_Access_Privilege"]}})
+
+db.jobConfig.remove({"_id":"VRO-PREDEFINED-METRIC-PROPERTIES-ALERTS-SYNC"});
+db.jobConfig.remove({"_id":"VC-PREDEFINED-CUSTOM-ATTRIBUTES-SYNC"});
+db.jobConfig.remove({"_id":"NLYTE-PREDEFINED-FETCH-ASSET-TO-WORMHOLE"});
+db.jobConfig.remove({"_id":"NLYTE-PREDEFINED-UPDATE-MAPPEDASSET-TO-WORMHOLE"});
+db.jobConfig.remove({"_id":"NLYTE-PREDEFINED-Sync-REALTIMEDATA"});
+db.jobConfig.remove({"_id":"POWERIQ-SYNC-REALTIMEDATA"});
+db.jobConfig.remove({"_id":"POWERIQ-SYNC-SENSORDATA"});
+db.sensorSetting.updateMany({"_class":"com.vmware.wormhole.common.model.SensorSetting"},{$set:{"_class":"com.vmware.flowgate.common.model.SensorSetting"}});
