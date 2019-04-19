@@ -1,6 +1,6 @@
 ## Introduction
 
-This guide provides instructions for developers to build and run Flowgate from source code.
+This guide provides instructions for developers to build Flowgate from source code.
 
 ## Step 1: Prepare for a build environment for Flowgate
 
