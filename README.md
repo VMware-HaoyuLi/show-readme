@@ -11,7 +11,7 @@
 |Software|Version|Description|
 |---|---|---|
 |Ubuntu|version 16.04|ubuntu 16.04|
-|Git|version 2.7.4 or higher|For installation instructions, please refer to: https://docs.docker.com/engine/installation/|
+|Git|version 2.7.4 or higher|For installation instructions, please refer to: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git|
 |Docker|version 18.09.2 or higher|For installation instructions, please refer to: https://docs.docker.com/engine/installation/|
 |Docker-compose|latest is preferred|For installation instructions, please refer to: https://docs.docker.com/compose/install/|
 
