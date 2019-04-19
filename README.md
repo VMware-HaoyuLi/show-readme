@@ -1,12 +1,26 @@
+# Installation and Configuration Guide
+Flowgate can be installed by one of three approaches: 
+- **Online installer:** The installer downloads Harbor's images from Docker hub. For this reason, the installer is very small in size.
 
-# Network ports
+- **Offline installer:** Use this installer when the host does not have an Internet connection. The installer contains pre-built images so its size is larger.
+
+All installers can be downloaded from the **[official release](https://github.com/goharbor/harbor/releases)** page. 
+
+This guide describes the steps to install and configure Flowgate by using the online or offline installer.
+
+ The installation processes are almost the same. 
+
+## Prerequisites for the target host
+Harbor is deployed as several Docker containers, and, therefore, can be deployed on any Linux distribution that supports Docker. The target host requires Python, Docker, and Docker Compose to be installed. 
+
+### Network ports
 
 |Port|Protocol|Description|
 |---|---|---|
 |443|HTTPS|Flowgate will accept requests on this port for https protocol|
 |80|HTTP|Flowgate will accept requests on this port for http protocol|
 
-# Software
+### Software
 
 |Software|Version|Description|
 |---|---|---|
@@ -15,16 +29,11 @@
 |Docker|version 18.09.2 or higher|For installation instructions, please refer to: https://docs.docker.com/engine/installation/|
 |Docker-compose|latest is preferred|For installation instructions, please refer to: https://docs.docker.com/compose/install/|
 
-# Installation Steps
-1. generating a SSH keys for your git clone
+## Installation Steps
 ```
-2. git clone git@github.com:vmware/flowgate.git
-```
-```
-3. cd flowgate/make
-```
-```
-4. bash build.sh all -version v1.0
+1. git clone git@github.com:vmware/flowgate.git
+2. cd flowgate/make
+3. bash build.sh all -version v1.0
 ```
 
 # run
@@ -37,7 +46,9 @@
 ``` 
 docker-compose -f maven-docker-build/docker-compose.run.images.yml down
 ```
-
+# Login
+* default username admin , password Admin!23
+* access https://hostname to visit
 # issue
 ## 1. curl#6: Couldn't resolve host name.
 ### add two nameserver to /etc/resolv.conf
