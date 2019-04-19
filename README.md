@@ -4,12 +4,12 @@
 
 # Software
 * ubuntu 16.04
-* git (laster)
-* docker (laster)
-* docker-compose (laster)
+* git (latest)
+* docker (latest)
+* docker-compose (latest)
 
 # Installation Steps
-1. add ssh key
+1. generating a SSH keys for your git clone
 2. `git clone git@github.com:vmware/flowgate.git`
 3. `cd flowgate/make`
 4. `bash build.sh all -version v1.0`
