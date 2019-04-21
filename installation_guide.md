@@ -37,13 +37,12 @@ Please refer to **[Flowgate Compile Guide](compile_guide.md)**.
 ### Binary Installation
 
 1. Download the installer from server https://url;
-2. Use *tar* command to extract the package, then you will get three files, ```flowgate_run.sh```, ```conf.tar.gz```, ```flowgate.tar```.
-*(Note that put the three files into the same folder.)*
+2. Use *tar* command to extract the package.
 ```
     $ sudo tar xvf flowgate-*.tar
 ```
 
-3. loading docker images:
+3. Then you will get three files, ```flowgate_run.sh```, ```conf.tar.gz```, ```flowgate.tar```.Put them into the same folder and loading docker images:
 ```
     $ sudo docker load < flowgate.tar
 ```
