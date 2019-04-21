@@ -40,7 +40,7 @@ Please refer to **[Flowgate Compile Guide](compile_guide.md)**.
 2. Use *tar* command to extract the package, then you will get three files, ```flowgate_run.sh```, ```conf.tar.gz```, ```flowgate.tar```.
 *(Note that put the three files into the same folder.)*
 ```
-    $ sudo tar xvf flowgate-v1.0.tar
+    $ sudo tar xvf flowgate-*.tar
 ```
 
 3. loading docker images:
@@ -57,7 +57,7 @@ Please refer to **[Flowgate Compile Guide](compile_guide.md)**.
 ```
 *Note*
 1. Source Installation flowgate_run.sh file under *flowgate/make* folder.
-2. Binary Installation flowgate_run.sh file extract from Binary.tar.
+2. Binary Installation flowgate_run.sh file extract from flowgate-*.tar.
 
 If everything worked properly, you should be able to open a browser to visit the admin portal at **https://yourdomain** (change *yourdomain* to your server's hostname). Note that the default administrator username/password are admin/Admin!23.
 
