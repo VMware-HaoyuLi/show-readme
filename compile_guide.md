@@ -14,8 +14,8 @@ git                   | 1.9.1 +
 
 ## Step 2: Getting the source code
 
-   ```sh
-      $ git clone git@github.com:vmware/flowgate.git
+   ```
+      $ sudo git clone git@github.com:vmware/flowgate.git
    ```
 
 ## Step 3: Building and installing Flowgate
@@ -23,16 +23,16 @@ git                   | 1.9.1 +
 
 *  Build Flowgate:
 
-   ```sh
-      $ cd flowgate/
-      $ bash build.sh all -version v1.0
+   ```
+      $ cd flowgate/make/
+      $ sudo bash build.sh all -version v1.0
    ```
 
 ### Verify your installation
 
 If everything worked properly, you can get the below message:
 
-   ```sh
+   ```
       ...
       build success.
    ```
@@ -75,6 +75,6 @@ version            | Specify a version number for Flowgate.
 #### execute build script
 
    ```sh
-      $ bash build.sh
+      $ sudo bash build.sh
       eg. 'bash build.sh ( ui | jar | image | save | all ) -version v1.0'
    ```
