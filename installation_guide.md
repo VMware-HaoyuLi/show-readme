@@ -40,7 +40,7 @@ Please refer to **[Flowgate Compile Guide](compile_guide.md)**.
 2. Use *tar* command to extract the package, then you will get three files, ```flowgate_run.sh```, ```conf.tar.gz```, ```flowgate.tar```.
 *(Note that put the three files into the same folder.)*
 ```
-    $ tar xvf flowgate-v1.0.tar
+    $ sudo tar xvf flowgate-v1.0.tar
 ```
 
 3. loading docker images:
