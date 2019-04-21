@@ -54,7 +54,7 @@ Please refer to **[Flowgate Compile Guide](compile_guide.md)**.
 ```
     $ sudo bash flowgate_run.sh
 ```
-*Note*
+*Note*:
 1. Source Installation flowgate_run.sh file under *flowgate/make* folder.
 2. Binary Installation flowgate_run.sh file extract from flowgate-*.tar.
 
