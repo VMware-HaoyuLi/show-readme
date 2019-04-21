@@ -3,7 +3,7 @@ Flowgate can be installed by one of two approaches:
 
 - **Source installer:** The installer downloads Flowgate's source code from github. Please refer to **[Flowgate Compile Guide](compile_guide.md)**.
 
-- **Binary installer:** The installer downloads Flowgate's Binary from server[url]. 
+- **Binary installer:** The installer downloads Flowgate's Binary from server[https://url]. 
 
 
 This guide describes the steps to install and configure Flowgate by using the Source or Binary installer. The run processes are almost the same. 
@@ -36,7 +36,7 @@ Please refer to **[Flowgate Compile Guide](compile_guide.md)**.
 
 ### Binary Installation
 
-1. Download the installer from server[url];
+1. Download the installer from server[https://url];
 2. Use *tar* command to extract the package, then you will get three files, ```flowgate_run.sh```, ```conf.tar.gz```, ```flowgate.tar```.
 *(Note that put the three files into the same folder.)*
 ```
