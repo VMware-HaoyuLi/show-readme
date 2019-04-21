@@ -76,5 +76,5 @@ version            | Specify a version number for Flowgate.
 
    ```sh
       $ bash build.sh
-      eg. 'bash build.sh ( ui | jar | image | save | copy2server | all ) -version v1.0'
+      eg. 'bash build.sh ( ui | jar | image | save | all ) -version v1.0'
    ```
