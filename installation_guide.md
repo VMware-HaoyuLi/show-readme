@@ -3,7 +3,7 @@ Flowgate can be installed by one of two approaches:
 
 - **Source installer:** The installer downloads Flowgate's source code from github. Please refer to **[Flowgate Compile Guide](compile_guide.md)**.
 
-- **Binary installer:** The installer downloads Flowgate's Binary from server https://url. 
+- **Binary installer:** The installer downloads Flowgate's Binary from server http://10.192.81.38/flowgate-v1.0.0.tar.
 
 
 This guide describes the steps to install and configure Flowgate by using the Source or Binary installer. The run processes are almost the same. 
@@ -36,15 +36,31 @@ Please refer to **[Flowgate Compile Guide](compile_guide.md)**.
 
 ### Binary Installation
 
-1. Download the installer from server https://url;
+1. Download the installer from server http://10.192.81.38/flowgate-v1.0.0.tar;
 2. Use *tar* command to extract the package.
 ```
     $ sudo tar xvf flowgate-*.tar
+    flowgate.tar
+    conf.tar.gz
+    flowgate_run.sh
+
 ```
 
 3. Then you will get three files, ```flowgate_run.sh```, ```conf.tar.gz```, ```flowgate.tar```.Put them into the same folder and loading docker images:
 ```
     $ sudo docker load < flowgate.tar
+    Loaded image: flowgate/infoblox-worker:v1.0
+    Loaded image: flowgate/labsdb-worker:v1.0
+    Loaded image: flowgate/api:v1.0
+    Loaded image: flowgate/mongodb:v1.0
+    Loaded image: flowgate/vro-worker:v1.0
+    Loaded image: flowgate/vc-worker:v1.0
+    Loaded image: flowgate/poweriq-worker:v1.0
+    Loaded image: flowgate/aggregator:v1.0
+    Loaded image: flowgate/redis:v1.0
+    Loaded image: flowgate/nlyte-worker:v1.0
+    Loaded image: flowgate/management:v1.0
+
 ```
 
 ## Finishing installation and starting Flowgate
@@ -53,8 +69,49 @@ Please refer to **[Flowgate Compile Guide](compile_guide.md)**.
 
 ```
     $ sudo bash flowgate_run.sh
+    conf/
+    conf/flowgate-api/
+    conf/flowgate-api/application.properties
+    conf/poweriq-worker/
+    conf/poweriq-worker/application.properties
+    conf/vro-worker/
+    conf/vro-worker/application.properties
+    conf/vc-worker/
+    conf/vc-worker/application.properties
+    conf/management/
+    conf/management/application.properties
+    conf/mongodb/
+    conf/mongodb/mongod.conf
+    conf/mongodb/initdb.js
+    conf/mongodb/mongod.env
+    conf/redis/
+    conf/redis/redis.conf
+    conf/labsdb-worker/
+    conf/labsdb-worker/application.properties
+    conf/nlyte-worker/
+    conf/nlyte-worker/application.properties
+    conf/infoblox-worker/
+    conf/infoblox-worker/application.properties
+    conf/aggregator/
+    conf/aggregator/application.properties
+    conf/cert/
+    conf/cert/Flowgate.cnf
+    Creating network "mavendockerbuild_db-network" with the default driver
+    Creating network "mavendockerbuild_services-network" with the default driver
+    Creating flowgate-mongo-container
+    Creating flowgate-redis-container
+    Creating flowgate-api-container
+    Creating flowgate-vc-worker-container
+    Creating flowgate-nlyte-worker-container
+    Creating flowgate-poweriq-worker-container
+    Creating flowgate-aggregator-container
+    Creating flowgate-management-container
+    Creating flowgate-labsdb-worker-container
+    Creating flowgate-vro-worker-container
+    Creating flowgate-infoblox-worker-container
+
 ```
-*Note*
+*Note*:
 1. Source Installation flowgate_run.sh file under *flowgate/make* folder.
 2. Binary Installation flowgate_run.sh file extract from flowgate-*.tar.
 
