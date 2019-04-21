@@ -55,7 +55,7 @@ Please refer to **[Flowgate Compile Guide](compile_guide.md)**.
 ```
     $ sudo bash flowgate_run.sh
 ```
-*(Note: Source Installation flowgate_run.sh file under flowgate/make/.Binary Installation flowgate_run.sh file extract from flowgate-*.tar)*
+*(Note: Source Installation flowgate_run.sh file under flowgate/make/.Binary Installation flowgate_run.sh file extract from flowgate-/*.tar)*
 
 If everything worked properly, you should be able to open a browser to visit the admin portal at **https://yourdomain** (change *yourdomain* to your server's hostname). Note that the default administrator username/password are admin/Admin!23.
 
