@@ -9,7 +9,7 @@ Flowgate can be installed by one of two approaches:
 This guide describes the steps to install and configure Flowgate by using the Source or Binary installer. The run processes are almost the same. 
 
 ## Prerequisites for the target host
-Flowgate is deployed as several Docker containers, and can be deployed on any Linux distribution that supports Docker. The target host requires Docker, and Docker Compose to be installed.  
+Flowgate is deployed as several Docker containers, and can be deployed on any Linux distribution that supports Docker. The target host requires Git, Docker, and Docker Compose to be installed.  
 ### Hardware
 |Resource|Capacity|Description|
 |---|---|---|
