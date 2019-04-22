@@ -36,7 +36,7 @@ Please refer to **[Flowgate Compile Guide](compile_guide.md)**.
 
 ### Binary Installation
 
-1. Download the installer from server http://10.192.81.38/flowgate-v1.0.0.tar;
+1. Download the installer from server http://10.192.81.38/flowgate-v1.0.0.tar.
 2. Use *tar* command to extract the package.
 ```
     $ sudo tar xvf flowgate-*.tar
