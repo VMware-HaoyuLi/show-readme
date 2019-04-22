@@ -46,7 +46,7 @@ Please refer to **[Flowgate Compile Guide](compile_guide.md)**.
 
 ```
 
-3. Then you will get three files, ```flowgate_run.sh```, ```conf.tar.gz```, ```flowgate.tar```.Put them into the same folder and loading docker images:
+3. Then you will get three files, ```flowgate_run.sh```, ```conf.tar.gz```, ```flowgate.tar```,```maven-docker-build/docker-compose.run.images.yml```.Put them into the same folder and loading docker images:
 ```
     $ sudo docker load < flowgate.tar
     Loaded image: flowgate/infoblox-worker:v1.0
